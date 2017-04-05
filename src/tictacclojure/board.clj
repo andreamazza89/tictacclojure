@@ -33,7 +33,7 @@
   [cells]
   (= 1 (count (set cells))))
 
-(defn- rows
+(defn rows
   [board]
   (partition 3 board))
 
