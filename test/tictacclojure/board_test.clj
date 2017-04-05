@@ -56,13 +56,13 @@
              :o :_ :_
              :_ :o :_
              :_ :_ :o)]
-       (is (= :x (board/find-line-with-same-mark board-w-horizontal-x-line))
+       (is (= :x (board/find-mark-from-full-line board-w-horizontal-x-line))
            "Finds the mark that is the same in a row (x)")
-       (is (= :o (board/find-line-with-same-mark board-w-vertical-o-line))
+       (is (= :o (board/find-mark-from-full-line board-w-vertical-o-line))
            "Finds the mark that is the same in a column (o)")
-       (is (= :x (board/find-line-with-same-mark board-w-up-diagonal-x-line))
+       (is (= :x (board/find-mark-from-full-line board-w-up-diagonal-x-line))
            "Finds the mark that is the same in an upwards diagonal (x)")
-       (is (= :o (board/find-line-with-same-mark board-w-down-diagonal-o-line))
+       (is (= :o (board/find-mark-from-full-line board-w-down-diagonal-o-line))
            "Finds the mark that is the same in a downwards diagonal (o)")
-       (is (= nil (board/find-line-with-same-mark (board/new-board)))
+       (is (= nil (board/find-mark-from-full-line (board/new-board)))
            "An empty board has no lines with the same mark"))))

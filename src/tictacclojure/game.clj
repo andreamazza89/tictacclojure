@@ -19,7 +19,7 @@
 (defn winner
   [game]
   (let [board (:board game)]
-    (board/find-line-with-same-mark board)))
+    (board/find-mark-from-full-line board)))
 
 (defn over?
   [game]

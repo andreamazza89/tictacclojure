@@ -4,13 +4,9 @@
   []
   [0 1 2 3 4 5 6 7 8])
 
-(defn empty?
-  [board]
-  (every? integer? board))
-
 (defn full?
   [board]
-     (every? keyword? board))
+    (every? keyword? board))
 
 (defn add-move
   [board [move-cell mark]]
@@ -63,7 +59,7 @@
   [board]
   [(upwards-diagonal board) (downwards-diagonal board)])
 
-(defn find-line-with-same-mark
+(defn find-mark-from-full-line
   [board]
   (let [lines (concat (columns board) (rows board) (diagonals board))]
     (ffirst (filter all-cells-same-mark? lines))))

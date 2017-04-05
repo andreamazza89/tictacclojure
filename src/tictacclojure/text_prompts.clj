@@ -1,7 +1,17 @@
 (ns tictacclojure.text-prompts
   (:require [tictacclojure.board :as board]))
 
-(def newline "\n")
+(def greeting "Welcome to tictacclojure")
+
+(def draw-announcement "It was a draw!")
+
+(defn turn-announcement
+  [next-player]
+  (str "It's " (name next-player) "'s turn, please pick a move"))
+
+(defn winner-announcement
+  [winner]
+  (str "The winner was: " (name winner)))
 
 (defn- surround-with-spacer
   [cell-content]
@@ -17,7 +27,7 @@
 (defn- render-row
   [parsed-board row]
   (apply str parsed-board
-    (conj (vec (map render-cell row)) "\n")))
+    (conj (vec (map render-cell row)) (with-out-str (newline)))))
 
 (defn render-board
   [board]

@@ -1,6 +1,8 @@
-(ns tictacclojure.core)
+(ns tictacclojure.core
+  (:require [tictacclojure.game :as game]
+            [tictacclojure.board :as board]
+            [tictacclojure.console-runner :as runner]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  []
+  (runner/play-game (game/create-game (board/new-board) :x :o)))
