@@ -1,4 +1,5 @@
-(ns tictacclojure.board)
+(ns tictacclojure.board
+  (:require [clojure.math.numeric-tower :as math]))
 
 (defn new-board
   []
@@ -33,6 +34,10 @@
   [board]
   (partition 3 board))
 
+(defn- size
+  [board]
+  (math/sqrt (count board)))
+
 (defn- rotate-left
   [[first-cell & other-cells]]
   (conj (vec other-cells) first-cell))
@@ -40,10 +45,10 @@
 (defn- columns
   [board]
   (loop
-    [board board columns-left 3 columns []]
+    [board board columns-left (size board) columns []]
     (if (= 0 columns-left)
       columns
-      (recur (rotate-left board) (dec columns-left) (conj columns (take-nth 3 board))))))
+      (recur (rotate-left board) (dec columns-left) (conj columns (take-nth (size board) board))))))
 
 (defn- downwards-diagonal
   [board]

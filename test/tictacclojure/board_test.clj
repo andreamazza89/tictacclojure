@@ -17,17 +17,23 @@
       (is (= false (board/full? new-board))
           "A new board is not full")
       (is (= false (board/full? board-with-move))
-          "A board with a move is not full")
+          "A board with a move on it is not full")
       (is (= true (board/full? full-board))
           "A full board is full")))
 
    (testing "Moves available"
-     (let [board-one [:x 1 2 3 4 5 6 7 8]
-           board-two [:x :o 2 3 4 5 6 7 8]]
+     (let [board-one (helper/create-board
+            :x :_ :_
+            :_ :_ :_
+            :_ :_ :_)
+           board-two (helper/create-board
+            :_ :x :_
+            :_ :_ :_
+            :_ :_ :o)]
        (is (= [1 2 3 4 5 6 7 8]
               (board/moves-available board-one))
            "Only available moves are reported (example one)")
-       (is (= [2 3 4 5 6 7 8]
+       (is (= [0 2 3 4 5 6 7]
               (board/moves-available board-two))
            "Only available moves are reported (example two)")))
 
