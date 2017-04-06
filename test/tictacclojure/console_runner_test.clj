@@ -48,7 +48,7 @@
              "\n")
            (with-out-str
              (with-in-str "0\n3\n1\n4\n2\n"
-               (runner/play-game (game/create-game (board/new-board) :x :o))))))
+               (runner/play-game (game/create-game (board/new-board) [:x :human] [:o :human]))))))
 
     (let [draw-board (helper/create-board
                                   :o :x :o
@@ -60,4 +60,4 @@
              (text/render-board draw-board)
              "\n")
            (with-out-str
-             (runner/play-game (game/create-game draw-board :x :o))))))))
+             (runner/play-game (game/create-game draw-board [:x :human] [:o :human]))))))))

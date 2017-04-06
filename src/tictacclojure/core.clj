@@ -5,4 +5,4 @@
 
 (defn -main
   []
-  (runner/play-game (game/create-game (board/new-board) :x :o)))
+  (runner/play-game (game/create-game (board/new-board) [:x :human] [:o :easy-ai])))

@@ -9,6 +9,10 @@
   [board]
   (first (board-functions/moves-available board)))
 
-(defmulti  pick-move (fn [nature board mark] [nature]))
-(defmethod pick-move [:human] [_ _ _] (pick-move-for-human))
-(defmethod pick-move [:easy-ai] [_ board _] (pick-move-for-easy-ai board))
+(defn get-mark
+  [[mark nature]]
+  mark)
+
+(defmulti  pick-move (fn [[mark nature] board] [nature]))
+(defmethod pick-move [:human] [_ _] (pick-move-for-human))
+(defmethod pick-move [:easy-ai] [_ board] (pick-move-for-easy-ai board))
