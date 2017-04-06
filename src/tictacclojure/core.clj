@@ -1,6 +1,7 @@
 (ns tictacclojure.core
   (:require [tictacclojure.game :as game]
             [tictacclojure.board :as board]
+            [tictacclojure.text-game-options :as game-options]
             [tictacclojure.text-prompts :as text]
             [tictacclojure.console-runner :as runner]))
 
@@ -11,4 +12,4 @@
 (defn -main
   []
   (console-out text/greeting)
-  (runner/play-game (game/create-game (board/new-board) [:x :human] [:o :easy-ai])))
+  (runner/play-game (game-options/create-game)))

@@ -1,9 +1,13 @@
 (ns tictacclojure.player
   (:require [tictacclojure.board :as board-functions]))
 
+(defn- console-in
+  []
+  (read-line))
+
 (defn- pick-move-for-human
   []
-  (Integer/parseInt (read-line)))
+  (Integer/parseInt (console-in)))
 
 (defn- pick-move-for-easy-ai
   [board]

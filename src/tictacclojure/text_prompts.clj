@@ -3,6 +3,10 @@
 
 (def greeting "Welcome to tictacclojure")
 
+(def game-options "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai")
+
+(def swap-players "Would you like to swap who goes first? (y/n)")
+
 (def draw-announcement "It was a draw!")
 
 (defn turn-announcement
