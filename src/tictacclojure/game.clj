@@ -1,5 +1,6 @@
 (ns tictacclojure.game
-  (:require [tictacclojure.board :as board]))
+  (:require [tictacclojure.board :as board]
+            [tictacclojure.player :as player]))
 
 (defn create-game
   [board & players]
@@ -12,7 +13,7 @@
 (defn make-move
   [game cell-position]
   (let [current-player (whose-turn? game)
-        new-board (board/add-move (:board game) [cell-position current-player])
+        new-board (board/add-move (:board game) [cell-position (player/get-mark current-player)])
         new-players (reverse (:players game))]
         {:board new-board :players new-players}))
 

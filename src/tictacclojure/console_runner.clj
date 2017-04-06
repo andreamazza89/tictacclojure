@@ -18,10 +18,10 @@
 
 (defn- get-move-from-player
   [game]
-  (do
-    (console-out (text/turn-announcement (game/whose-turn? game)))
+  (let [current-player (game/whose-turn? game)]
+    (console-out (text/turn-announcement (player/get-mark current-player)))
     (console-out (text/render-board (:board game)))
-    (player/pick-move :human (:board game) (game/whose-turn? game))))
+    (player/pick-move current-player (:board game))))
 
 (defn play-game
   [game]

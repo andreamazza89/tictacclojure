@@ -6,20 +6,20 @@
 
 (deftest game-test
   (testing "Turn management"
-    (let [game-one (game/create-game (board/new-board) :x :o)
-          game-two (game/create-game (board/new-board) :o :x)]
-      (is (= :x (game/whose-turn? game-one))
+    (let [game-one (game/create-game (board/new-board) [:x :human] [:o :human])
+          game-two (game/create-game (board/new-board) [:o :human] [:x :human])]
+      (is (= [:x :human] (game/whose-turn? game-one))
           "In a new game the first player provided is the one who goes first (example one)")
-      (is (= :o (game/whose-turn? game-two))
+      (is (= [:o :human] (game/whose-turn? game-two))
           "In a new game the first player provided is the one who goes first (example two)")
-      (is (= :o (game/whose-turn? (game/make-move game-one 0)))
+      (is (= [:o :human] (game/whose-turn? (game/make-move game-one 0)))
           "After a move the current player is updated (example one)")
-      (is (= :x (game/whose-turn? (game/make-move game-two 0)))
+      (is (= [:x :human] (game/whose-turn? (game/make-move game-two 0)))
           "After a move the current player is updated (example two)")))
 
   (testing "Board transformations"
-    (let [game-one (game/create-game (board/new-board) :x :o)
-          game-two (game/create-game (board/new-board) :o :x)
+    (let [game-one (game/create-game (board/new-board) [:x :human] [:o :human])
+          game-two (game/create-game (board/new-board) [:o :human] [:x :human])
           move-one-postition 0
           move-two-postition 5
           board-one-after-move (:board (game/make-move game-one move-one-postition))
@@ -42,10 +42,10 @@
             :o :x :x
             :o :_ :_
             :o :_ :_)
-          new-game (game/create-game (board/new-board) :x :o)
-          game-w-tie (game/create-game tie-board :o :x)
-          game-w-horizontal-x-win (game/create-game board-w-horizontal-x-win :o :x)
-          game-w-vertical-o-win (game/create-game board-w-vertical-o-win :x :o)]
+          new-game (game/create-game (board/new-board) [:x :human] [:o :human])
+          game-w-tie (game/create-game tie-board       [:o :human] [:x :human])
+          game-w-horizontal-x-win (game/create-game board-w-horizontal-x-win [:x :human] [:o :human])
+          game-w-vertical-o-win (game/create-game board-w-vertical-o-win     [:o :human] [:x :human])]
       (is (= false (game/over? new-game))
           "A brand new game is not over")
       (is (= true (game/over? game-w-tie))
