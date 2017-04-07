@@ -9,7 +9,6 @@
 (deftest console-runner
   (testing "human-v-human"
     (is (= (str
-             "Welcome to tictacclojure\n"
              "It's x's turn, please pick a move\n"
              (text/render-board (helper/create-board
                                   :_ :_ :_
@@ -55,7 +54,6 @@
                                   :o :x :x
                                   :x :o :x)]
       (is (= (str
-             "Welcome to tictacclojure\n"
              "It was a draw!\n"
              (text/render-board draw-board)
              "\n")

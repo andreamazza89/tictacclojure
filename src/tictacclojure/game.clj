@@ -26,3 +26,7 @@
   [game]
   (let [board (:board game)]
     (boolean (or (board/full? board) (winner game)))))
+
+(defn swap-players
+  [game]
+  {:board (:board game) :players (reverse (:players game))})

@@ -25,7 +25,6 @@
 
 (defn play-game
   [game]
-  (console-out text/greeting)
   (loop [game game]
     (if (game/over? game)
       (end-game game)
