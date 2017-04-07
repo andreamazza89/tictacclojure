@@ -12,21 +12,21 @@
           "In a new game the first player provided is the one who goes first (example one)")
       (is (= [:o :human] (game/whose-turn? game-two))
           "In a new game the first player provided is the one who goes first (example two)")
-      (is (= [:o :human] (game/whose-turn? (game/make-move game-one 0)))
+      (is (= [:o :human] (game/whose-turn? (game/make-move game-one [0 :x])))
           "After a move the current player is updated (example one)")
-      (is (= [:x :human] (game/whose-turn? (game/make-move game-two 0)))
+      (is (= [:x :human] (game/whose-turn? (game/make-move game-two [0 :o])))
           "After a move the current player is updated (example two)")))
 
   (testing "Board transformations"
     (let [game-one (game/create-game (board/new-board) [:x :human] [:o :human])
           game-two (game/create-game (board/new-board) [:o :human] [:x :human])
-          move-one-postition 0
-          move-two-postition 5
-          board-one-after-move (:board (game/make-move game-one move-one-postition))
-          board-two-after-move (:board (game/make-move game-two move-two-postition))]
-      (is (= :x (board/get-cell-at board-one-after-move move-one-postition))
+          move-one [0 :x]
+          move-two [5 :o]
+          board-one-after-move (:board (game/make-move game-one move-one))
+          board-two-after-move (:board (game/make-move game-two move-two))]
+      (is (= :x (board/get-cell-at board-one-after-move (first move-one)))
           "Adds current players's flag to the board at the position provided (example one)")
-      (is (= :o (board/get-cell-at board-two-after-move move-two-postition))
+      (is (= :o (board/get-cell-at board-two-after-move (first move-two)))
           "Adds current players's flag to the board at the position provided (example two)")))
 
   (testing "Rules"

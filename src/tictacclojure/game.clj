@@ -10,11 +10,15 @@
   [game]
   (first (:players game)))
 
+(defn swap-players
+  [game]
+  {:board (:board game) :players (reverse (:players game))})
+
 (defn make-move
-  [game cell-position]
+  [game move]
   (let [current-player (whose-turn? game)
-        new-board (board/add-move (:board game) [cell-position (player/get-mark current-player)])
-        new-players (reverse (:players game))]
+        new-board (board/add-move (:board game) move)
+        new-players (:players (swap-players game))]
         {:board new-board :players new-players}))
 
 (defn winner
@@ -26,7 +30,3 @@
   [game]
   (let [board (:board game)]
     (boolean (or (board/full? board) (winner game)))))
-
-(defn swap-players
-  [game]
-  {:board (:board game) :players (reverse (:players game))})
