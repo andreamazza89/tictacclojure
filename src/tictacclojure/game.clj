@@ -1,6 +1,5 @@
 (ns tictacclojure.game
-  (:require [tictacclojure.board :as board]
-            [tictacclojure.player :as player]))
+  (:require [tictacclojure.board :as board]))
 
 (defn create-game
   [board & players]

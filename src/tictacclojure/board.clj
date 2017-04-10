@@ -9,6 +9,10 @@
   [board]
     (every? keyword? board))
 
+(defn is-empty?
+  [board]
+  (every? integer? board))
+
 (defn add-move
   [board [move-cell mark]]
   (map

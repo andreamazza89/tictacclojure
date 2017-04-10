@@ -1,5 +1,6 @@
 (ns tictacclojure.player
-  (:require [tictacclojure.board :as board]))
+  (:require [tictacclojure.board :as board]
+            [tictacclojure.minimax :as minimax]))
 
 (defn- console-in
   []
@@ -14,24 +15,9 @@
   (let [board (:board game)]
   [(first (board/moves-available board)) mark]))
 
-(defn- rate-game-outcome
-  [game mark]
-
-  ;(println board)
-  ;(println mark)
-  5)
-
-(defn- rate-move
-  [board mark move]
-    (rate-game-outcome
-      (board/add-move board [move mark])
-      mark))
-
 (defn- pick-move-for-minimax
-  [game mark]
-  (apply max-key
-         (partial rate-move game mark)
-         (board/moves-available game)))
+  [game maximising-mark]
+  (minimax/pick-move game maximising-mark))
 
 (defmulti  pick-move (fn [[mark nature] game] [nature]))
 (defmethod pick-move [:human]   [[mark _] _]    (pick-move-for-human mark))
@@ -41,8 +27,3 @@
 (defn get-mark
   [[mark nature]]
   mark)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn foo [n] (cond
-                (> n 5) "ciao"
-                (= n 2) "miao"))
