@@ -29,12 +29,26 @@
           parsed-full-board (str
             "|x||o||x|\n"
             "|o||x||o|\n"
-            "|x||o||x|\n")]
+            "|x||o||x|\n")
+          full-board-4x4(helper/create-board
+            :x :o :x :o
+            :o :x :o :x
+            :x :o :x :x
+            :x :o :o :o)
+          parsed-full-board-4x4 (str
+            "|x||o||x||o|\n"
+            "|o||x||o||x|\n"
+            "|x||o||x||x|\n"
+            "|x||o||o||o|\n")]
 
       (is (= parsed-empty-board (text/render-board empty-board))
         "Renders an empty board into its string representation")
       (is (= parsed-board-with-moves (text/render-board board-with-moves))
-        "Renders a board with moves into its string representation")))
+        "Renders a board with moves into its string representation")
+      (is (= parsed-full-board (text/render-board full-board))
+        "Renders a full board into its string representation")
+      (is (= parsed-full-board-4x4 (text/render-board full-board-4x4))
+        "Renders a full board (4x4) into its string representation")))
 
   (testing "Announce winner"
     (is (= "The winner was: winner-one" (text/winner-announcement :winner-one))

@@ -6,14 +6,15 @@
 
 (deftest text-game-options
   (testing "Game selection"
-    (is (= (str "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai\n"
+    (is (= (str "Please select a board size:\n3->3x3\n4->4x4\n"
+                "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai\n"
                 "Would you like to swap who goes first? (y/n)\n")
            (with-out-str
-             (with-in-str "1\ny\n"
+             (with-in-str "3\n1\ny\n"
                (options/create-game))))
       "Prompts the user for game options")
     (with-out-str
-      (is (= (game/create-game (board/new-board) [:o :easy-ai] [:x :human])
-           (with-in-str "2\ny\n"
+      (is (= (game/create-game (board/new-board 4) [:o :easy-ai] [:x :human])
+           (with-in-str "4\n2\ny\n"
              (options/create-game)))
-      "Prompts the user for game options"))))
+      "Generates a game based on the user's input (4x4, humanVhuman, swap)"))))

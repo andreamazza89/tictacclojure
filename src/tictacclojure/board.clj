@@ -2,8 +2,10 @@
   (:require [clojure.math.numeric-tower :as math]))
 
 (defn new-board
-  []
-  [0 1 2 3 4 5 6 7 8])
+  ([] (new-board 3))
+  ([size] (vec
+            (range
+              (* size size)))))
 
 (defn full?
   [board]
@@ -38,13 +40,13 @@
   [cells]
   (= 1 (count (set cells))))
 
-(defn rows
-  [board]
-  (partition 3 board))
-
 (defn- size
   [board]
   (math/sqrt (count board)))
+
+(defn rows
+  [board]
+  (partition (size board) board))
 
 (defn- rotate-left
   [[first-cell & other-cells]]
