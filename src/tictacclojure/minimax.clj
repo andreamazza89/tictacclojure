@@ -11,6 +11,17 @@
   [moves-available maximising-mark]
   [(first moves-available) maximising-mark])
 
+(defn- rate-intermediate-board
+  [game maximising-mark depth]
+  (let [maximising? (= maximising-mark (first (game/whose-turn? game)))
+        moves-available (board/moves-available (:board game))
+        scored-moves (map
+                       (partial rate-move game maximising-mark (inc depth))
+                       moves-available)]
+    (if maximising?
+        (apply max scored-moves)
+        (apply min scored-moves))))
+
 (defn- rate-game-outcome
   [game maximising-mark depth]
   (let [winners-mark (game/winner game)]
@@ -19,29 +30,19 @@
     (= winners-mark nil)             tie-score
     :else                            (- depth best-score))))
 
-(defn- rate-intermediate-move
-  [game maximising-mark depth]
-  (let [maximising? (= maximising-mark (first (game/whose-turn? game)))
-        moves-available (board/moves-available (:board game))
-        moves-scores (map
-                       (partial rate-move game maximising-mark (inc depth))
-                       moves-available)]
-    (if maximising?
-        (apply max moves-scores)
-        (apply min moves-scores))))
-
 (defn- rate-move
   [game maximising-mark depth position]
   (let [game-after-move (game/make-move game [position (first (game/whose-turn? game))])]
     (if (game/over? game-after-move)
       (rate-game-outcome game-after-move maximising-mark depth)
-      (rate-intermediate-move game-after-move maximising-mark depth))))
+      (rate-intermediate-board game-after-move maximising-mark depth))))
 
 (defn- pick-best-move
   [game moves-available maximising-mark]
-  [(apply max-key
-     (partial rate-move game maximising-mark initial-depth)
-     moves-available) maximising-mark])
+  (let [best-position (apply max-key
+                        (partial rate-move game maximising-mark initial-depth)
+                        moves-available)]
+  [best-position maximising-mark]))
 
 (defn pick-move
   [game maximising-mark]

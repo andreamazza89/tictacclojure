@@ -13,13 +13,17 @@
   [board]
   (every? integer? board))
 
+(defn- replace-position-with-mark
+  [mark replace-position current-position]
+  (if
+    (= replace-position current-position)
+    mark
+    current-position))
+
 (defn add-move
-  [board [move-cell mark]]
+  [board [position mark]]
   (map
-    (fn [cell]
-      (if (= cell move-cell)
-        mark
-        cell))
+    (partial replace-position-with-mark mark position)
     board))
 
 (defn moves-available
