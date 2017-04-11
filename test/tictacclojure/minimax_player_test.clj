@@ -11,6 +11,10 @@
             :_ :_ :_
             :_ :_ :_
             :_ :_ :_) [:x :minimax] [:o :minimax])
+          game-w-one-move-in-board (game/create-game (helper/create-board
+            :o :_ :_
+            :_ :_ :_
+            :_ :_ :_) [:x :minimax] [:o :minimax])
           game-w-almost-full-board (game/create-game (helper/create-board
             :o :x :o
             :o :x :x
@@ -31,6 +35,9 @@
             :x :_ :_
             :_ :o :_
             :_ :_ :o) [:x :minimax] [:o :minimax])]
+
+      (time (println (player/pick-move [:x :minimax] game-w-one-move-in-board)))
+
       (is (= [0 :x] (player/pick-move [:x :minimax] game-w-empty-board))
           "Chooses the topleft corner at the start of the game")
       (is (= [7 :o] (player/pick-move [:o :minimax] game-w-almost-full-board))

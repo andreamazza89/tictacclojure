@@ -17,7 +17,7 @@
 
 (defn- pick-move-for-minimax
   [game maximising-mark]
-  (minimax/pick-move game maximising-mark))
+  (minimax/memo-pick-move game maximising-mark))
 
 (defmulti  pick-move (fn [[mark nature] game] [nature]))
 (defmethod pick-move [:human]   [[mark _] _]    (pick-move-for-human mark))
