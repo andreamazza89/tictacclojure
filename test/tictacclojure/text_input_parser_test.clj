@@ -28,7 +28,11 @@
     (is (=
           (game/create-game (board/new-board 4) [:x :easy-ai] [:o :easy-ai])
           (parser/parse-game "3" (board/new-board 4)))
-      "Parses user selection into an easy-ai v easy-ai game"))
+      "Parses user selection into an easy-ai v easy-ai game")
+    (is (=
+          (game/create-game (board/new-board 3) [:x :human] [:o :minimax])
+          (parser/parse-game "4" (board/new-board 3)))
+      "Parses user selection into a human v minimax game"))
 
   (testing "Swap order"
     (let [game-one (game/create-game (board/new-board) [:x :human] [:o :human])
