@@ -11,9 +11,10 @@
 (defn parse-game
   [selection board]
   (case selection
-    "1" (game/create-game board [:x :human] [:o :human])
-    "2" (game/create-game board [:x :human] [:o :easy-ai])
-    "3" (game/create-game board [:x :easy-ai] [:o :easy-ai])))
+    "1" (game/create-game board [:x :human]   [:o :human])
+    "2" (game/create-game board [:x :human]   [:o :easy-ai])
+    "3" (game/create-game board [:x :easy-ai] [:o :easy-ai])
+    "4" (game/create-game board [:x :human]   [:o :minimax])))
 
 (defn swap-players
   [yes-no game]

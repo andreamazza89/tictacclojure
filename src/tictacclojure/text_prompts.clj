@@ -5,7 +5,7 @@
 
 (def board-size "Please select a board size:\n3->3x3\n4->4x4")
 
-(def game-options "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai")
+(def game-options "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai\n4. Human V MiniMax")
 
 (def swap-players "Would you like to swap who goes first? (y/n)")
 
