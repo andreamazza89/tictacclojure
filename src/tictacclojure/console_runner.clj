@@ -21,7 +21,7 @@
   (let [current-player (game/whose-turn? game)]
     (console-out (text/turn-announcement (player/get-mark current-player)))
     (console-out (text/render-board (:board game)))
-    (player/pick-move current-player (:board game))))
+    (player/pick-move current-player game)))
 
 (defn play-game
   [game]
