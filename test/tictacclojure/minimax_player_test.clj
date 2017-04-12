@@ -12,9 +12,10 @@
             :_ :_ :_
             :_ :_ :_) [:x :minimax] [:o :minimax])
           game-w-one-move-in-board (game/create-game (helper/create-board
-            :o :_ :_
-            :_ :_ :_
-            :_ :_ :_) [:x :minimax] [:o :minimax])
+            :o :o :_ :x
+            :_ :_ :_ :_
+            :_ :o :_ :_
+            :o :x :_ :x) [:x :minimax] [:o :minimax])
           game-w-almost-full-board (game/create-game (helper/create-board
             :o :x :o
             :o :x :x
