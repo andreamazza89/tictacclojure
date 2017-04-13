@@ -43,4 +43,49 @@
           "Swaps the players if the user wants to")
       (is (= :x
              (player/get-mark (game/whose-turn? swapped-game-two)))
-          "Does not swap the players if the user does not want to"))))
+          "Does not swap the players if the user does not want to")))
+
+  (testing "Input validation-board size"
+    (is (= true
+           (parser/validate-board-size "3"))
+        "A board of size '3' can be created")
+    (is (= false
+           (parser/validate-board-size "three"))
+        "A board of size 'three' cannot be created")
+    (is (= true
+           (parser/validate-board-size "4"))
+        "A board of size '4' can be created")
+    (is (= false
+           (parser/validate-board-size "42"))
+        "A board of size '42' cannot be created"))
+
+  (testing "Input validation-game type"
+    (is (= true
+           (parser/validate-game-type "1"))
+        "A game of type '1' can be created")
+    (is (= false
+           (parser/validate-game-type "one"))
+        "A game of type 'one' cannot be created")
+    (is (= true
+           (parser/validate-game-type "2"))
+        "A game of type '2' can be created")
+    (is (= false
+           (parser/validate-game-type "42"))
+        "A game of type '42' can be created")
+    (is (= true
+           (parser/validate-game-type "3"))
+        "A game of type '3' can be created")
+    (is (= true
+           (parser/validate-game-type "4"))
+        "A game of type '3' can be created"))
+
+  (testing "Input validation-swap players"
+    (is (= true
+           (parser/validate-swap-players "y"))
+        "'y' is a valid answer to swapping players")
+    (is (= false
+           (parser/validate-swap-players "ciaoone"))
+        "'ciaoone is not a valid answer to swapping players'")
+    (is (= true
+           (parser/validate-swap-players "n"))
+        "'n' is a valid answer to swapping players")))

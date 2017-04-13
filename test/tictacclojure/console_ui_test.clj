@@ -13,11 +13,11 @@
            (with-in-str "test input\n"
              (ui/get-input)))
       "Gets input from the console")
-    (is (= "\n"
+    (is (= ""
            (with-out-str
              (with-in-str "test input\n"
                (ui/get-input))))
-      "Prints an empty line when no prompt message is given")
+      "Prints nothing when no prompt message is given")
     (is (= "test prompt\n"
            (with-out-str
              (with-in-str "test input\n"
