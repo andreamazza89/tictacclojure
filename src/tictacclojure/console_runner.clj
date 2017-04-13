@@ -1,26 +1,23 @@
 (ns tictacclojure.console-runner
   (:require [tictacclojure.board :as board]
-            [tictacclojure.text-prompts :as text]
+            [tictacclojure.text-prompts :as prompts]
+            [tictacclojure.console-ui :as ui]
             [tictacclojure.player :as player]
             [tictacclojure.game :as game]))
-
-(defn- console-out
-  [message]
-  (println message))
 
 (defn- end-game
   [game]
   (do
     (if (game/winner game)
-      (console-out (text/winner-announcement (game/winner game)))
-      (console-out text/draw-announcement))
-    (console-out (text/render-board (:board game)))))
+      (ui/print-out (prompts/winner-announcement (game/winner game)))
+      (ui/print-out prompts/draw-announcement))
+    (ui/print-out (prompts/render-board (:board game)))))
 
 (defn- get-move-from-player
   [game]
   (let [current-player (game/whose-turn? game)]
-    (console-out (text/turn-announcement (player/get-mark current-player)))
-    (console-out (text/render-board (:board game)))
+    (ui/print-out (prompts/turn-announcement (player/get-mark current-player)))
+    (ui/print-out (prompts/render-board (:board game)))
     (player/pick-move current-player game)))
 
 (defn play-game
