@@ -33,9 +33,9 @@
   (filter integer? board))
 
 (defn position-available?
-  [board move]
+  [board position]
   (boolean
-    (some #(= move %) (positions-available board))))
+    (some #(= position %) (positions-available board))))
 
 (defn get-cell-at
   [board cell-position]

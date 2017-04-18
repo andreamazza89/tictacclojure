@@ -15,14 +15,14 @@
   ([prompt]
     (get-input prompt always-validate ""))
 
-  ([validate error-message]
-   (get-input "" validate error-message))
+  ([is-valid? error-message]
+   (get-input "" is-valid? error-message))
 
-  ([prompt validate error-message]
+  ([prompt is-valid? error-message]
     (if (not-empty prompt) (print-out prompt))
     (let [user-input (read-line)]
-      (if (validate user-input)
+      (if (is-valid? user-input)
         user-input
         (do
           (print-out error-message)
-          (recur prompt validate error-message))))))
+          (recur prompt is-valid? error-message))))))
