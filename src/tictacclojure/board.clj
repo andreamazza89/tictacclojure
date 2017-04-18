@@ -33,6 +33,7 @@
   (filter integer? board))
 
 (defn position-available?
+
   [board position]
   (boolean
     (some #(= position %) (positions-available board))))
