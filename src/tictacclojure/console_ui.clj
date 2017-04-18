@@ -15,11 +15,8 @@
   ([prompt]
     (get-input prompt always-validate ""))
 
-  ([validate error-message]
-   (get-input "" validate error-message))
-
   ([prompt validate error-message]
-    (if (not-empty prompt) (print-out prompt))
+    (print-out prompt)
     (let [user-input (read-line)]
       (if (validate user-input)
         user-input

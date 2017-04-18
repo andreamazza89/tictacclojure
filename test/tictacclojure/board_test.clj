@@ -60,13 +60,13 @@
            :_ :_ :o :x
            :_ :o :_ :_)]
       (is (= [1 2 3 4 5 6 7 8]
-             (board/positions-available board-one))
+             (board/moves-available board-one))
           "Only available moves are reported (example one)")
       (is (= [0 2 3 4 5 6 7]
-             (board/positions-available board-two))
+             (board/moves-available board-two))
           "Only available moves are reported (example two)")
       (is (= [0 2 3 4 5 6 7 8 9 12 14 15]
-             (board/positions-available board-three-4x4))
+             (board/moves-available board-three-4x4))
           "Only available moves are reported (example three 4x4)")))
 
   (testing "Making a move"
@@ -78,11 +78,7 @@
       (is (= :o (board/get-cell-at board-with-o-move 1))
           "Adds the given mark to the given position (example two)")
       (is (= :x (board/get-cell-at board-with-x-move-4x4 14))
-          "Adds the given mark to the given position (example three-4x4)")
-      (is (= true (board/position-available? board-with-x-move-4x4 0))
-          "Knows if a move can be made")
-      (is (= false (board/position-available? board-with-x-move-4x4 14))
-          "Knows if a move cannot be made")))
+          "Adds the given mark to the given position (example three-4x4)")))
 
   (testing "Checking lines contents"
     (let [board-w-horizontal-x-line (helper/create-board

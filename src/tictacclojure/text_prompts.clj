@@ -5,19 +5,11 @@
 
 (def board-size "Please select a board size:\n3->3x3\n4->4x4")
 
-(def invalid-board-size "Invalid board size: please try again.")
-
 (def game-options "Please select a game mode:\n1. Human V Human\n2. Human V Easy-Ai\n3. Easy-Ai V Easy-Ai\n4. Human V MiniMax")
-
-(def invalid-game-type "Invalid game mode: please try again.")
 
 (def swap-players "Would you like to swap who goes first? (y/n)")
 
-(def invalid-answer-to-swap-players "Invalid answer, please try again.")
-
 (def draw-announcement "It was a draw!")
-
-(def invalid-move "Invalid move: please try again.")
 
 (defn turn-announcement
   [next-player]
