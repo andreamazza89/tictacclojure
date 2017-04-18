@@ -30,14 +30,14 @@
 (defn- rate-intermediate-board
   [game maximising-mark depth alpha beta]
   (let [maximising? (= maximising-mark (first (game/whose-turn? game)))
-        moves-available (board/moves-available (:board game))]
+        positions-available (board/positions-available (:board game))]
     (if maximising?
       (reduce (partial max-reduce game maximising-mark depth alpha beta)
               minus-infinity
-              moves-available)
+              positions-available)
       (reduce (partial min-reduce game maximising-mark depth alpha beta)
               plus-infinity
-              moves-available))))
+              positions-available))))
 
 (defn- rate-game-outcome
   [game maximising-mark depth]
@@ -50,26 +50,26 @@
 (defn- rate-move
   [game maximising-mark depth alpha beta position]
   (let [game-after-move (game/make-move game [position (first (game/whose-turn? game))])
-        moves-available (board/moves-available (:board game))]
+        positions-available (board/positions-available (:board game))]
     (if (or
           (game/over? game-after-move)
           (>= depth maximum-depth)
-          (>= (count moves-available) maximum-moves-to-evaluate))
+          (>= (count positions-available) maximum-moves-to-evaluate))
       (rate-game-outcome game-after-move maximising-mark depth)
       (rate-intermediate-board game-after-move maximising-mark depth alpha beta))))
 
 (def rate-move-memoed (memoize rate-move))
 
 (defn- pick-best-move
-  [game moves-available maximising-mark alpha beta]
+  [game positions-available maximising-mark alpha beta]
   (let [best-position (apply max-key
                         (partial rate-move-memoed game maximising-mark initial-depth alpha beta)
-                        moves-available)]
+                        positions-available)]
   [best-position maximising-mark]))
 
 (defn pick-move
   [game maximising-mark]
-  (let [moves-available (board/moves-available (:board game))]
-    (pick-best-move game moves-available maximising-mark minus-infinity plus-infinity)))
+  (let [positions-available (board/positions-available (:board game))]
+    (pick-best-move game positions-available maximising-mark minus-infinity plus-infinity)))
 
 (def memo-pick-move (memoize pick-move))

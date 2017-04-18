@@ -28,9 +28,14 @@
     (partial replace-position-with-mark mark position)
     board))
 
-(defn moves-available
-  [board-with-move]
-  (filter integer? board-with-move))
+(defn positions-available
+  [board]
+  (filter integer? board))
+
+(defn position-available?
+  [board position]
+  (boolean
+    (some #(= position %) (positions-available board))))
 
 (defn get-cell-at
   [board cell-position]
