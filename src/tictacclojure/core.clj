@@ -8,5 +8,6 @@
 
 (defn -main
   []
+  (ui/clear-screen)
   (ui/print-out text/greeting)
   (runner/play-game (game-options/create-game)))

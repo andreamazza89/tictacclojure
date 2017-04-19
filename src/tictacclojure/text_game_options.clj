@@ -13,6 +13,7 @@
 
 (defn- ask-user-for-game-type
   []
+  (ui/clear-screen)
   (ui/get-input
     prompts/game-options
     parser/validate-game-type
@@ -20,6 +21,7 @@
 
 (defn- ask-user-to-swap-players-order
   []
+  (ui/clear-screen)
   (ui/get-input
     prompts/swap-players
     parser/validate-swap-players

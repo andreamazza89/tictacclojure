@@ -8,6 +8,7 @@
 (defn- end-game
   [game]
   (do
+    (ui/clear-screen)
     (if (game/winner game)
       (ui/print-out (prompts/winner-announcement (game/winner game)))
       (ui/print-out prompts/draw-announcement))
@@ -16,6 +17,7 @@
 (defn- get-move-from-player
   [game]
   (let [current-player (game/whose-turn? game)]
+    (ui/clear-screen)
     (ui/print-out (prompts/turn-announcement (player/get-mark current-player)))
     (ui/print-out (prompts/render-board (:board game)))
     (player/pick-move current-player game)))

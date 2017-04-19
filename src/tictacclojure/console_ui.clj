@@ -1,8 +1,13 @@
-(ns tictacclojure.console-ui)
+(ns tictacclojure.console-ui
+  (:require [tictacclojure.text-prompts :as prompts]))
 
 (defn print-out
   [message]
   (println message))
+
+(defn clear-screen
+  []
+  (print prompts/clear-screen))
 
 (defn- always-validate
   [user-input]
