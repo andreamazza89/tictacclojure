@@ -11,7 +11,7 @@
 
 (defn swap-players
   [game]
-  {:board (:board game) :players (reverse (:players game))})
+  (update game :players reverse))
 
 (defn make-move
   [game move]
