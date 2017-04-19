@@ -6,7 +6,9 @@
 
 (deftest text-prompts
   (testing "Board rendering"
-    (let [empty-board (helper/create-board
+    (let [blu-x "\u001b[34mx\u001b[0m"
+          red-o  "\u001b[31mo\u001b[0m"
+          empty-board (helper/create-board
             :_ :_ :_
             :_ :_ :_
             :_ :_ :_)
@@ -22,22 +24,22 @@
             :_ :_ :_
             :_ :_ :o)
           parsed-board-with-moves (str
-            "| x | 1 | 2 |\n"
+            "| " blu-x " | 1 | 2 |\n"
             "\n"
             "| 3 | 4 | 5 |\n"
             "\n"
-            "| 6 | 7 | o |\n"
+            "| 6 | 7 | " red-o " |\n"
             "\n")
           full-board (helper/create-board
             :x :o :x
             :o :x :o
             :x :o :x)
           parsed-full-board (str
-            "| x | o | x |\n"
+            "| " blu-x " | " red-o " | " blu-x " |\n"
             "\n"
-            "| o | x | o |\n"
+            "| " red-o " | " blu-x " | " red-o " |\n"
             "\n"
-            "| x | o | x |\n"
+            "| " blu-x " | " red-o " | " blu-x " |\n"
             "\n")
           full-board-4x4(helper/create-board
             :x :o :x :o
@@ -45,13 +47,13 @@
             :x :o :x :_
             :x :o :_ :o)
           parsed-full-board-4x4 (str
-            "| x | o | x | o |\n"
+            "| " blu-x " | " red-o " | " blu-x " | " red-o " |\n"
             "\n"
-            "| o | x | o | 7 |\n"
+            "| " red-o " | " blu-x " | " red-o " | 7 |\n"
             "\n"
-            "| x | o | x |11 |\n"
+            "| " blu-x " | " red-o " | " blu-x " |11 |\n"
             "\n"
-            "| x | o |14 | o |\n"
+            "| " blu-x " | " red-o " |14 | " red-o " |\n"
             "\n")]
 
       (is (= parsed-empty-board (text/render-board empty-board))
