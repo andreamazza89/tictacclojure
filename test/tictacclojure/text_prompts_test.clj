@@ -11,35 +11,48 @@
             :_ :_ :_
             :_ :_ :_)
           parsed-empty-board (str
-            "|0||1||2|\n"
-            "|3||4||5|\n"
-            "|6||7||8|\n")
+            "| 0 | 1 | 2 |\n"
+            "\n"
+            "| 3 | 4 | 5 |\n"
+            "\n"
+            "| 6 | 7 | 8 |\n"
+            "\n")
           board-with-moves (helper/create-board
             :x :_ :_
             :_ :_ :_
             :_ :_ :o)
           parsed-board-with-moves (str
-            "|x||1||2|\n"
-            "|3||4||5|\n"
-            "|6||7||o|\n")
+            "| x | 1 | 2 |\n"
+            "\n"
+            "| 3 | 4 | 5 |\n"
+            "\n"
+            "| 6 | 7 | o |\n"
+            "\n")
           full-board (helper/create-board
             :x :o :x
             :o :x :o
             :x :o :x)
           parsed-full-board (str
-            "|x||o||x|\n"
-            "|o||x||o|\n"
-            "|x||o||x|\n")
+            "| x | o | x |\n"
+            "\n"
+            "| o | x | o |\n"
+            "\n"
+            "| x | o | x |\n"
+            "\n")
           full-board-4x4(helper/create-board
             :x :o :x :o
-            :o :x :o :x
-            :x :o :x :x
-            :x :o :o :o)
+            :o :x :o :_
+            :x :o :x :_
+            :x :o :_ :o)
           parsed-full-board-4x4 (str
-            "|x||o||x||o|\n"
-            "|o||x||o||x|\n"
-            "|x||o||x||x|\n"
-            "|x||o||o||o|\n")]
+            "| x | o | x | o |\n"
+            "\n"
+            "| o | x | o | 7 |\n"
+            "\n"
+            "| x | o | x |11 |\n"
+            "\n"
+            "| x | o |14 | o |\n"
+            "\n")]
 
       (is (= parsed-empty-board (text/render-board empty-board))
         "Renders an empty board into its string representation")

@@ -1,5 +1,8 @@
 (ns tictacclojure.text-prompts
-  (:require [tictacclojure.board :as board]))
+  (:require [tictacclojure.board :as board]
+            [clojure.string :refer :all]))
+
+(def carriage-return (with-out-str (newline)))
 
 (def greeting "Welcome to tictacclojure")
 
@@ -27,10 +30,19 @@
   [winner]
   (str "The winner was: " (name winner)))
 
+(defn- adjust-double-digits
+  [rendered-board]
+  (replace rendered-board #"\s(\d\d)\s" "$1 "))
+
+(defn- remove-double-spacers
+  [rendered-board]
+  (replace rendered-board "||" "|"))
+
 (defn- surround-with-spacer
   [cell-content]
-  (let [cell-spacer "|"]
-  (str cell-spacer cell-content cell-spacer)))
+  (let [cell-spacer-left "| "
+        cell-spacer-right " |"]
+  (str cell-spacer-left cell-content cell-spacer-right)))
 
 (defn- render-cell
   [cell]
@@ -41,9 +53,12 @@
 (defn- render-row
   [parsed-board row]
   (apply str parsed-board
-    (conj (vec (map render-cell row)) (with-out-str (newline)))))
+    (conj (vec (map render-cell row)) carriage-return carriage-return)))
 
 (defn render-board
   [board]
   (let [rows (board/rows board)]
-    (reduce render-row "" rows)))
+    (->
+      (reduce render-row "" rows)
+      (remove-double-spacers)
+      (adjust-double-digits))))
