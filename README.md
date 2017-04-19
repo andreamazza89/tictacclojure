@@ -1,4 +1,4 @@
-# Tictacclojure
+# Tictacclojure [![Build Status](https://travis-ci.org/andreamazza89/tictacclojure.svg?branch=master)](https://travis-ci.org/andreamazza89/tictacclojure)
 
 A [tictactoe](https://en.wikipedia.org/wiki/Tic-tac-toe) game written in Clojure,
 to be played in the command line.
