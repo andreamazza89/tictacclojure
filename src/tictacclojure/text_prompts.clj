@@ -30,6 +30,15 @@
   [winner]
   (str "The winner was: " (name winner)))
 
+(defn- colorise-marks
+  [rendered-board]
+  (let [blue-x "\u001b[34mx\u001b[0m"
+        red-o  "\u001b[31mo\u001b[0m"]
+    (->
+      rendered-board
+      (replace "x" blue-x)
+      (replace "o" red-o))))
+
 (defn- adjust-double-digits
   [rendered-board]
   (replace rendered-board #"\s(\d\d)\s" "$1 "))
@@ -61,4 +70,5 @@
     (->
       (reduce render-row "" rows)
       (remove-double-spacers)
-      (adjust-double-digits))))
+      (adjust-double-digits)
+      (colorise-marks))))
