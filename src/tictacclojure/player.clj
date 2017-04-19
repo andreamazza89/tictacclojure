@@ -13,20 +13,22 @@
 
 (defn- pick-move-for-human
   [{:keys [board]} mark]
-  (let [position (Integer/parseInt
+  (let [chosen-position (Integer/parseInt
                    (ui/get-input
                      (partial validate-text-move board)
                      prompts/invalid-move))]
-    [position mark]))
+    [chosen-position mark]))
 
 (defn- pick-move-for-easy-ai
   [game mark]
-  (let [board (:board game)]
-  [(first (board/positions-available board)) mark]))
+  (let [board (:board game)
+        chosen-position (first (board/positions-available board))]
+    [chosen-position mark]))
 
 (defn- pick-move-for-minimax
-  [game maximising-mark]
-  (minimax/memo-pick-move game maximising-mark))
+  [game mark]
+  (let [chosen-position (minimax/memo-pick-best-position game mark)]
+    [chosen-position mark]))
 
 (defmulti  pick-move (fn [[mark nature] game] [nature]))
 (defmethod pick-move [:human]   [[mark _] game] (pick-move-for-human    game mark))

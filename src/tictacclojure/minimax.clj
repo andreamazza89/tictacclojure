@@ -60,16 +60,14 @@
 
 (def rate-move-memoed (memoize rate-move))
 
-(defn- pick-best-move
-  [game positions-available maximising-mark alpha beta]
-  (let [best-position (apply max-key
+(defn- pick-best-position
+  [game maximising-mark]
+  (let [positions-available (board/positions-available (:board game))
+        alpha minus-infinity
+        beta plus-infinity
+        best-position (apply max-key
                         (partial rate-move-memoed game maximising-mark initial-depth alpha beta)
                         positions-available)]
-  [best-position maximising-mark]))
+  best-position))
 
-(defn pick-move
-  [game maximising-mark]
-  (let [positions-available (board/positions-available (:board game))]
-    (pick-best-move game positions-available maximising-mark minus-infinity plus-infinity)))
-
-(def memo-pick-move (memoize pick-move))
+(def memo-pick-best-position (memoize pick-best-position))
