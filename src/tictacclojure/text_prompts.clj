@@ -4,6 +4,8 @@
 
 (def carriage-return (with-out-str (newline)))
 
+(def clear-screen "\u001b[2J\u001b[;H")
+
 (def greeting "Welcome to tictacclojure")
 
 (def board-size "Please select a board size:\n3->3x3\n4->4x4")
